@@ -3,7 +3,7 @@ How to remove bloat apps from any Android / Samsung device
 
 The following guide aims to assist you in removing unnecessary apps in your Android device and I set Samsung as an example.
 
-Before you proceed you must understand that by using the following method will remove the app from your user folder in Android NOT your system folder, which means you can do factory reset to restore back all the apps.
+Before you proceed you must understand that by using the following method it'll remove the app from your user folder in Android NOT your system folder, which means you can do factory reset to restore back all the apps.
 
 Other than resetting your device to factory settings you can restore some of the apps by going to the Play Store and install it back check out the id in this link:
 
