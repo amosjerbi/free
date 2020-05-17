@@ -1,4 +1,4 @@
-# Android
+# Freebies
 How to remove bloat apps from any Android / Samsung device
 
 The following guide aims to assist you in removing unnecessary apps in your Android device and I set Samsung as an example.
