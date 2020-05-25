@@ -13,6 +13,13 @@
     font-family: 'noot';
     }
   </style>
+
+  <!-- <style type="text/css">
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100');
+    .trashed {
+      font-family: 'Montserrat', sans-serif;
+    }
+  </style> -->
     <g id="trash" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <text class="trashed" font-family="Noot" font-size="15" font-weight="normal" fill="#000000">
             <tspan x="12.9472656" y="55">Trash</tspan>
