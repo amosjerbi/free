@@ -1,0 +1,82 @@
+Amos Jerbi's optimal MacOS environment:
+
+1. Disable Adobe’s Login Items
+
+Open Terminal and paste in the following commands. 
+
+launchctl unload -w {,~}/Library/LaunchAgents/com.adobe.*.plist
+
+sudo launchctl unload -w /Library/LaunchDaemons/com.adobe.*.plist
+
+launchctl unload -w /Library/LaunchAgents/com.adobe.AdobeCreativeCloud.plist
+
+To restore those items - 
+
+launchctl load -w {,~}/Library/LaunchAgents/com.adobe.*.plist
+
+sudo launchctl load -w /Library/LaunchDaemons/com.adobe.*.plist
+
+launchctl load -w /Library/LaunchAgents/com.adobe.AdobeCreativeCloud.plist
+
+
+2. Shrink your assets
+
+https://image-shrinker.com/
+https://github.com/kyleduo/TinyPNG4Mac/releases
+https://jakearchibald.github.io/svgomg/
+
+3. Manage MacOS windows
+
+https://www.spectacleapp.com/
+
+4. Capture Screenshots to Clipboard
+
+Use CTRL + Shift + CMD + 4
+
+OR
+
+Use the following keyboard shortcut:
+CMD + Shift + 5
+
+Click Options & choose Clipboard & then paste your screenshots to whatever app you want
+
+
+5. Download ANY Youtube Video
+
+Step 1:
+brew install youtube-dl
+
+Step 2:
+youtube-dl www.youtube.com/watch?v=URL -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
+
+OR
+
+youtube-dl www.youtube.com/watch?v= URL -f 'bestvideo[ext=mp4]'
+
+Documentation: https://ytdl-org.github.io/youtube-dl/
+
+
+6. Cast Android screen to Mac
+
+Open terminal and paste the following command:
+
+Step 1:
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+Step 2:
+brew install scrcpy
+
+Step 3:
+brew cask install android-platform-tools
+
+Once the installation is complete just plug in your Android to your Mac & type:
+scrcpy
+
+Documentation: https://github.com/Genymobile/scrcpy
+
+
+
+
+
+
+
