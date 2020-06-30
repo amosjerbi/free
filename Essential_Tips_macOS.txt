@@ -1,4 +1,4 @@
-Amos Jerbi's optimal MacOS environment:
+Amos Jerbi's Essential Tips macOS:
 
 1. Disable Adobe’s Login Items
 
