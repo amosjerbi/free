@@ -47,6 +47,7 @@ Step 1:
 brew install youtube-dl
 
 Step 2:
+youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0 https://www.youtube.com/watch?v=im3A2nzZXpw
 youtube-dl www.youtube.com/watch?v=URL -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
 
 OR
