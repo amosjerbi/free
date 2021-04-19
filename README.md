@@ -1,4 +1,13 @@
-# Freebies
+How to install multiple APKs from a folder:
+
+1. In MacOS open TextEdit and copy this line: 
+
+adb install-multiple [-lrtsdpg] /Users/user_name/Desktop/apks/*.apk
+
+2. Delete the path folder and drag one of the files to the TextEditor
+3. Once you have the correct path just copy & paste it to the Terminal (ADB must be installed).
+
+---
 How to remove bloat apps from any Android / Samsung device
 
 The following guide aims to assist you in removing unnecessary apps in your Android device and I set Samsung as an example.
