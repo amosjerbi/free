@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="description" content="Interface designer that knows front coding & aims to impact your business">
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#fff">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#fff">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+  <!-- Basic Page Needs<!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#fff">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#fff">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="#fff">
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Amos Jerbi</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,600,800" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+  <!--CSS -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/aos.css">
+  <link rel="stylesheet" href="assets/css/lightgallery.css">
+  <link rel="stylesheet" href="assets/font/socialfont.css">
+</head>
+
+<style>
+  /* ::selection {
+    background: #E6E8E4;
+    color: #999C94;
+  } */
+
+  .count:before {
+    color: #E2E8ED;
+  }
+
+  p {
+    font-size: 20px;
+    line-height: 155%;
+    letter-spacing: .00464286em;
+  }
+
+  /* h4,
+  h1 {
+    color: #F3AD9D;
+  } */
+
+  .icon_vert {
+    animation: moveup 2s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+  }
+
+  .icon_vert2 {
+    animation: movedown 2s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-direction: alternate;
+  }
+
+  .layer1 {
+    position: relative;
+    right: 2%;
+    width: 65%;
+  }
+
+  .layer2 {
+    position: relative;
+    right: -26%;
+    width: 70%;
+  }
+
+  .layer1,
+  .layer2 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  @keyframes movedown {
+    0% {
+      transform: translateY(10px);
+      /* opacity: 0; */
+    }
+
+    100% {
+      transform: translateY(0px);
+      /* opacity: 1; */
+    }
+  }
+
+  @keyframes moveup {
+    0% {
+      transform: translateY(0px);
+      /* opacity: 0; */
+    }
+
+    100% {
+      transform: translateY(10px);
+      /* opacity: 1; */
+    }
+  }
+
+  .img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 10px;
+  }
+
+  .header {
+    text-align: center;
+    padding: 4rem 3rem 0 3rem;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Create four equal columns that sits next to each other */
+  #lightgallery {
+    column-count: 3;
+    column-gap: 1%;
+    /* column-width: 100%; */
+  }
+
+  .flow {
+    grid-row-end: span 30;
+  }
+
+  .social {
+    padding: 1rem 1rem 1rem 1rem;
+  }
+
+  /* Responsive layout - makes a two column-layout instead of four columns */
+  @media (max-width: 800px) {
+    .flow {
+      grid-row-end: span 14;
+    }
+
+    #lightgallery {
+      column-count: 2;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+    }
+
+  }
+
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media (max-width: 600px) {
+    .flow {
+      grid-row-end: span 14;
+    }
+
+    #lightgallery {
+      column-count: 1;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+
+    }
+
+    .header {
+      padding: 4rem 0 2rem 0;
+    }
+
+    .section2 {
+      padding: 3rem 0.2rem;
+    }
+
+    h1 {
+      font-size: 2.3em;
+    }
+  }
+</style>
+
+<body>
+  <nav class="navbar">
+    <div class="container-nav">
+      <div class="novile" aria-label="menu" aria-expanded="false">
+        <div class="burger">
+          <div class="burger_line"></div>
+          <div class="burger_line"></div>
+          <div class="burger_line"></div>
+        </div>
+        <div class="global-nav">
+          <ul class="global-nav__list" style="--length: 12">
+            <li style="--index: 0;"><a href="bitboarding.html">bit</a></li>
+            <li style="--index: 1;"><a href="gofer.html">Gofer</a></li>
+            <li style="--index: 2;"><a href="payback.html">Payback</a></li>
+            <li style="--index: 3;"><a href="mills.html">Mills</a></li>
+            <li style="--index: 4;"><a href="gallery.html">Illustrations</a></li>
+            <li style="--index: 5;"><a href="design_kit.html">Design_kit</a></li>
+            <li style="--index: 6; display: inline-flex;"><a href="https://www.youtube.com/amosjerbi" target="_blank" class="novile-items"><i class="fa-fa-youtube"></i></a></li>
+            <li style="--index: 7; display: inline-flex;"><a href="https://instagram.com/amosjerbi" target="_blank" rel="noopener" rel="noopener" rel="noopener" class="novile-items"><i class="fa-fa-instagram"></i></a></li>
+            <li style="--index: 8; display: inline-flex;"><a href="https://www.linkedin.com/in/amosjerbi/" target="_blank" rel="noopener" rel="noopener" rel="noopener" class="novile-items"><i class="fa-fa-linkedin"></i></a></li>
+
+            <li class="nav_line_list" style="--index: 9;"></li>
+            <li class="contact_me" style="--index: 10;">
+              <h5><a href="tel:+972-507205884">
+                  +972-507-205-884
+                </a></h5>
+            </li>
+            <li class="contact_me" style="--index: 11;">
+              <h5><a href="mailto:amosjerbi@gmail.com?subject=Hey Amos, let's meet up!">
+                  amosjerbi@gmail.com
+                </a></h5>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="brand">
+        <a href="index.html">
+          <img src="assets/images/amoslogo.svg" alt="logo">
+        </a>
+      </div>
+      <ul class="menu-end">
+        <li><a href="bitboarding.html" class="menu-item">bit</a></li>
+        <li><a href="gofer.html" class="menu-item">Gofer</a></li>
+        <li><a href="mills.html" class="menu-item">Mills</a></li>
+        <li><a href="payback.html" class="menu-item">Payback</a></li>
+        <li><a href="design_kit.html" class="menu-item">design_kit</a></li>
+        <li>
+          <a href="https://github.com/amosjerbi/me/raw/master/assets/downloads/2020_Amosjerbi_CV.zip" target="_blank" rel="noopener" class="button_prime">
+            Get CV
+          </a>
+        </li>
+      </ul>
+      <div class="navbutton"><a href="https://github.com/amosjerbi/me/raw/master/assets/downloads/2020_Amosjerbi_CV.zip" target="_blank" rel="noopener" class="button_prime">
+          Get CV
+        </a>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <section class="section is-smallish has-background-bit">
+      <div class="container">
+        <div class="grid12 is-small">
+          <div class="column_left_hero">
+            <h5 class="herointro is-uppercase has-text-light"><strong>BANK HAPOALIM - 2021</strong></h5>
+            <h2 class="hero_heading has-text-light">BITCARD & WALLET</h2>
+            <p class="hero_paragraph has-text-light">
+              The most popular paying app in Israel with over 2 million emarked on new mission launching a new credit card the bitcard & wallet to pay with your phone
+              <br><br> Available now on bit v5.3.1
+            </p>
+            <a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/3d_bitcard_Apple.usdz" target="_blank" rel="noopener" class="button_white">
+              Check out bitcard in 3D
+            </a>
+          </div>
+
+          <div class="column_right_hero">
+            <div class="layer1 icon_vert"><img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/bitcard_back.png" alt="Header_bitcard"></div>
+            <div class="layer2 icon_vert2"><img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/bitcard_front.png" alt="Header_bitcard"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12">
+          <div class="column_left row-top">
+            <div class="count"></div>
+            <h3>The Challenge</h3>
+          </div>
+          <div class="column_right row-bottom">
+            <p>The rise of COVID19 made retailers & small business owners rethink how payments should be made so we came up with an idea to launch a new credit card that'll be added to a digitial wallet and allow tap to pay with your phone.
+              Additionally, bit didn't have the functionality of adding multiple bank accounts and credit cards.
+              Our time to market was short since an outside competition was imminent.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/01_bitcard.webp">
+    </section>
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12">
+          <div class="column_left row-top">
+            <div class="count"></div>
+            <h3>bitcard Branding</h3>
+            <br>
+            <p>At first, there was a dicussion whether the card should be designed horizontally or vertically. After an extensive research we came to the conclusion that it should be vertical because all EMV devices at the point of sale were designed
+              insert the card vertically.
+            </p>
+          </div>
+          <div class="column_right row-bottom">
+            <p>We also wanted a minimalistic approach so I asked what could be removed from the front of the credit card. It was also important to maintain the same spirit of the bit app by communicating simplicity & elegance.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12 is-small">
+          <div class="column_right row-top">
+            <div class="count"></div>
+            <h3>Ordering bitcard</h3>
+            <br>
+            <p>Once you agree to order a bitcard a webview of Cal will open up and you’ll need to fill in your details, such as social security number, full name, address, profession etc in order to make sure you’re a real person.
+            </p>
+            <br>
+            <p>When you finish this proccess you’ll be greeted with a screen that states “we’ve got it!” (it has an animation of a dog that winks). At that point we add that bitcard as token to your bit app & if your device has an NFC we encourage
+              you to add it to a wallet</p>
+          </div>
+          <div class="column_left row-bottom">
+            <div class="" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1100" data-aos-easing="ease-out-sine"><a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/02_bitcard.webp" target="_blank"><img
+                  src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/02_bitcard.webp" class="img"></a></div>
+            <br>
+          </div>
+        </div>
+    </section>
+
+    <!-- <section class="section is-small">
+      <div class="container">
+        <div class="grid12">
+  <div class="column_left row-top">
+    <p>Once you agree to order a bitcard a webview of Cal will open up and you’ll need to fill in your details, such as social security number, full name, address, profession etc in order to make sure you’re a real person.
+    </p>
+  </div>
+  <div class="column_right row-bottom">
+    <p>When you finish this proccess you’ll be greeted with a screen that states “we’ve got it!” (it has an animation of a dog that winks). At that point we add that bitcard as token to your bit app & if your device has an NFC we encourage
+      you to add it to a wallet</p>
+  </div>
+</div>
+      </div>
+    </section> -->
+
+    <section>
+      <a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/03_bitcard.mp4" target="_blank">
+        <video autoplay muted loop class="img" src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/03_bitcard.mp4" />
+      </a>
+      <!-- <img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/03_bitcard.webp"> -->
+    </section>
+
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12">
+          <div class="column_left row-top">
+            <div class="count"></div>
+            <h3>Activating your wallet!</h3>
+          </div>
+          <div class="column_right row-bottom">
+            <p>After you’ve ordered your bitcard, you’d be prompted to add it to bit’s digital wallet. Only if you’ve got NFC that is, otherwise it won’t work.
+            </p>
+            <br>
+            <p>We’ll ask for a phone permission so we could make a reading to the Point of Sale and if everything is A-OK you’ll get a green bar that’ll appear for 10 seconds indicating you’re good to go. In case you’ll need further help we’ve put a
+              link within that green bar that explains it all through & through.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12 is-small">
+          <div class="column_right row-top">
+            <h1>Look at that card spinning ya'll!</h1>
+          </div>
+          <div class="column_left row-bottom">
+            <a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/04_bitcard.mp4" target="_blank">
+              <video autoplay muted loop class="img" src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/04_bitcard.mp4" />
+              <!-- <div class="" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1200" data-aos-easing="ease-out-sine"><a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/04_bitcard.webp" target="_blank"><img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/04_bitcard.webp" class="img"></a></div>
+            <br> -->
+            </a>
+          </div>
+        </div>
+    </section>
+
+    <section>
+      <a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/05_bitcard.mp4" target="_blank">
+        <video autoplay muted loop class="img" src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/05_bitcard.mp4" />
+      </a>
+      <!-- <img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/05_bitcard.webp"> -->
+    </section>
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12 is-small">
+          <div class="column_right row-bottom">
+            <a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/07_bitcard.mp4" target="_blank">
+              <video autoplay muted loop class="img" src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/07_bitcard.mp4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1100" data-aos-easing="ease-out-sine" />
+            </a>
+            <!-- <div class="" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1200" data-aos-easing="ease-out-sine"><a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/07_bitcard.webp" target="_blank"><img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/07_bitcard.webp" class="img"></a></div> -->
+          </div>
+          <div class="column_left row-top">
+            <div class="" data-aos="fade-up" data-aos-delay="400" data-aos-duration="1100" data-aos-easing="ease-out-sine"><a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/06_bitcard.webp" target="_blank"><img
+                  src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/06_bitcard.webp" class="img"></a></div>
+          </div>
+        </div>
+    </section>
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12 is-small">
+          <div class="column_left row-top">
+            <div class="count"></div>
+            <h3>Prompts & Errors</h3>
+          </div>
+          <div class="column_right row-bottom">
+            <p>
+              Whenever an error occured an illustration of a dog will explain the situation, the reasons were:
+              <br><br>
+              1. It’s unexcpected - the illustration briefly explains what went without even reading the message<br>
+              2. It’s memorable - meaning a customer could understand what needs to be done next time it pops up, or when he/she call to call center & describe the illustration<br>
+              3. Genderless - Aims to both sexs
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/08_bitcard.webp">
+    </section>
+
+    <section class="section is-small">
+      <h1 class="is-center" style="text-align: center; padding-bottom:5%;">How the Animations were made</h1>
+      <div class="container">
+        <div class="grid12">
+          <div class="column_left row-top">
+            <p>Animations aren’t a ‘nice thing to have’ they serve a purpose it’s either to explain something complex very briefly or delight our customers once they finished a proccess.
+              Most of our animations are JSONS played by lottie, meaning they’re vectors and can be scalable. Run some certain keyframes in a loop etc.
+            </p>
+          </div>
+          <div class="column_right row-bottom">
+            <p>
+              1. Creating the illustration & keyframes.<br>
+              2. With the AEUX plugin I transfer shapes from Sketch to After Effects.<br>
+              3.Exported it all using the bodymovin plugin & test it on LottieFiles both on Android & iOS to check if we’re A-OK.<br>
+              4. Once it’s up I scan the QR
+              to see how if anything breaks on iOS & Android
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <img src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/09_bitcard.webp">
+
+
+
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12 is-small">
+          <div class="column_left row-bottom">
+            <h1 class="is-bold">Monitor Your Expenses</h1>
+            <br>
+            <p>Examine how much you spent each month, while watching your average total spendings.</p>
+          </div>
+          <div class="column_right row-top">
+            <a href="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/10_bitcard.mp4" target="_blank">
+              <video autoplay muted loop class="img" src="https://raw.githubusercontent.com/amosjerbi/portfolio/master/assets/bitcard/10_bitcard.mp4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1100" data-aos-easing="ease-out-sine" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section is-small">
+      <div class="container">
+        <div class="grid12 is-small">
+          <div class="column_left row-top">
+            <div class="count"></div>
+            <h3>Thanks &amp; Credits.</h3>
+            <br>
+            <p>High fives to all who were involved &amp; hope to share with you more features as we push forward! 💪</p>
+            <br>
+            <p>
+              Amos Jerbi (UI, branding &amp; Animations)<br>
+              David Hazut (Head of bit's Product)<br>
+              Shiran Gal (Product Manager)<br>
+              Moran Ben Yehuda (Product Manager)<br>
+              Evelyn Hadad (Product Manager)<br>
+              Tal Solomon (CX Leader)<br>
+              Itay Shhigger Zur (UX)<br>
+              Ram Bracha (UX)<br>
+              Lynn Alhadef (UX)<br>
+              <br>
+              &amp; Our incredible dev team
+            </p>
+          </div>
+          <div class="column_right row-bottom">
+            <div class="aos-init aos-animate" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1100" data-aos-easing="ease-out-sine"><a href="#"><img src="assets/bitboarding/08_bitboarding_thanks.png" alt="08_bitboarding_thanks"></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section is-small">
+        <div class="container">
+          <!--<div class="divider"></div>-->
+          <h4 class="projects">MORE PROJECTS</h4>
+          <div class="more_grid">
+            <a class="more" href="mills.html" style="background-image: url('https://github.com/amosjerbi/me/raw/master/assets/thumb/thumb_3.jpg');">
+              <div class="is-uppercase">mills</div>
+            </a>
+            <a class="more" href="payback.html" style="background-image: url('https://github.com/amosjerbi/me/raw/master/assets/payback/payback_thumb.jpg');">
+              <div class="is-uppercase">payback</div>
+            </a>
+            <a class="more" href="gofer.html" style="background-image: url('https://github.com/amosjerbi/me/raw/master/assets/thumb/thumb_4.jpg');">
+              <div class="is-uppercase">gofer</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer id="footer" class="section">
+    <section>
+      <div class="section">
+        <div class="container">
+          <div class="footer_grid">
+            <div class="footer_logo">
+              <img src="assets/images/amoslogo.svg" alt="logo">
+            </div>
+            <div class="footer_links_col1">
+              <h6>About</h6>
+              <p>
+                A self taught designer that loves his craft and can be very technical when needed, speaking of which, this website was coded by yours truly.
+                Just inspect away
+              </p>
+            </div>
+            <div class="footer_links_col2">
+              <h6>Downloads</h6>
+              <ul>
+                <li><a href="https://github.com/amosjerbi/me/raw/master/assets/downloads/2020_Amosjerbi_CV.zip" class="menu-item">Resume CV</a></li>
+                <li><a href="https://github.com/amosjerbi/me/raw/master/assets/downloads/carmelit.zip" class="menu-item">Carmelit Font</a></li>
+                <li><a href="https://github.com/amosjerbi/me/raw/master/assets/downloads/noot.zip" class="menu-item">Noot Font</a></li>
+                <li><a href="https://github.com/amosjerbi/me/raw/master/assets/downloads/ptil.zip" class="menu-item">Ptil Font</a></li>
+                <li><a href="https://github.com/amosjerbi/me/raw/master/assets/downloads/Amos_Birthday_Freebie.sketch" class="menu-item">Freebie Illustration</a></li>
+              </ul>
+            </div>
+            <div class="footer_links_col3">
+              <h6>Reach Out</h6>
+              <ul>
+                <li><a href="tel:+972-507205884" class="menu-item">+972-507-205-884</a></li>
+                <li><a href="mailto:amosjerbi@gmail.com?subject=Hey Amos, let's meet up!" class="menu-item">amosjerbi@gmail.com</a></li>
+              </ul>
+              <div class="footer_social">
+                <a href="https://www.youtube.com/amosjerbi" target="_blank" rel="noopener" class="contact-icon"><i class="fa-fa-youtube"></i></a>
+                <a href="https://instagram.com/amosjerbi" target="_blank" rel="noopener" class="contact-icon"><i class="fa-fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/amosjerbi/" target="_blank" rel="noopener" class="contact-icon"><i class="fa-fa-linkedin"></i></a>
+                <a href="https://dribbble.com/amosjerbi" target="_blank" rel="noopener" class="contact-icon"><i class="fa-fa-dribbble"></i></a>
+              </div>
+            </div>
+            <div class="footer_legals">
+              <h6 class="has-text-credit"><a href="https://ajerbi.com/" target="_blank" rel="noopener" class="has-text-credit">Website Made with ❤️ by Amos Jerbi © <script>
+                    document.write(new Date().getFullYear())
+                  </script></a></h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
+  <!-- JS Links -->
+
+  <script>
+    (function($) {
+
+      $('.accordion a').click(function(j) {
+        var dropDown = $(this).closest('li').find('p');
+
+        $(this).closest('.accordion').find('p').not(dropDown).slideUp();
+
+        if ($(this).hasClass('active')) {
+          $(this).removeClass('active');
+        } else {
+          $(this).closest('.accordion').find('a.active').removeClass('active');
+          $(this).addClass('active');
+        }
+
+        dropDown.stop(false, true).slideToggle();
+
+        j.preventDefault();
+      });
+    })(jQuery);
+  </script>
+  <script src="assets/css/analytics.js"></script>
+  <script src="assets/css/glide.js"></script>
+  <script src="assets/css/aos.js"></script>
+  <script src="assets/css/main.js"></script>
+</body>
+
+</html>
