@@ -63,6 +63,12 @@ pm uninstall -k --user 0 com.google.android.music
 pm uninstall -k --user 0 com.google.android.webview
 pm uninstall -k --user 0 com.google.android.apps.messaging
 
+pm uninstall -k --user 0 com.samsung.android.calendar
+pm uninstall -k --user 0 com.samsung.android.app.contacts
+pm uninstall -k --user 0 com.samsung.android.game.gamehome
+pm uninstall -k --user 0 com.samsung.android.spay
+pm uninstall -k --user 0 com.sec.android.app.sbrowser
+pm uninstall -k --user 0 com.sec.android.app.samsungapps
 pm uninstall -k --user 0 com.samsung.android.arzone
 pm uninstall -k --user 0 com.samsung.android.bixby.agent
 pm uninstall -k --user 0 com.samsung.android.app.contacts
