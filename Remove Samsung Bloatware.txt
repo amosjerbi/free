@@ -55,6 +55,7 @@ pm uninstall -k --user 0 com.google.android.apps.docs
 pm uninstall -k --user 0 com.google.android.tts
 pm uninstall -k --user 0 com.google.android.apps.tachyon
 pm uninstall -k --user 0 com.google.android.youtube
+pm uninstall -k --user 0 com.google.android.apps.youtube.music
 pm uninstall -k --user 0 com.google.android.marvin.talkback
 pm uninstall -k --user 0 com.google.android.apps.books
 pm uninstall -k --user 0 com.google.android.videos
@@ -62,6 +63,10 @@ pm uninstall -k --user 0 com.google.android.music
 pm uninstall -k --user 0 com.google.android.webview
 pm uninstall -k --user 0 com.google.android.apps.messaging
 
+pm uninstall -k --user 0 com.samsung.android.arzone
+pm uninstall -k --user 0 com.samsung.android.bixby.agent
+pm uninstall -k --user 0 com.samsung.android.app.contacts
+pm uninstall -k --user 0 com.samsung.android.app.spage
 pm uninstall -k --user 0 com.samsung.privilege
 pm uninstall -k --user 0 com.samsung.th.galaxyappcenter
 pm uninstall -k --user 0 com.samsung.android.app.galaxyfinder
