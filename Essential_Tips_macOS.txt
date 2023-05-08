@@ -75,6 +75,15 @@ scrcpy
 
 Documentation: https://github.com/Genymobile/scrcpy
 
+7. Get important files from Android with ADB on macOS
+
+~/Desktop = the desktop of your macOS
+emulated = hidden folder on Android
+
+Adb pull storage/emulated/0/Android/media ~/Desktop
+
+Adb pull storage/emulated/0/DCIM/ ~/Desktop
+
 
 
 
