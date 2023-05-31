@@ -84,6 +84,18 @@ Adb pull storage/emulated/0/Android/media ~/Desktop
 
 Adb pull storage/emulated/0/DCIM/ ~/Desktop
 
+8. Compress PDFs with ImageMagick
+
+Step 1:
+brew install imagemagick
+
+Step 2:
+brew install ghostscript
+
+Step 3:
+magick [drag to terminal filename.pdf] -alpha off -compress jpeg -quality 50 -units PixelsPerInch -density 600 [same path & filename.pdf]
+--
+Play around with from 50 to 100:
 
 
 
