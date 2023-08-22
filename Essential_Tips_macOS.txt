@@ -97,6 +97,14 @@ magick [drag to terminal filename.pdf] -alpha off -compress jpeg -quality 50 -un
 --
 Play around with from 50 to 100:
 
+=======
+png sequence to gif using imagemagick
+=======
+
+Cd to folder
+convert -dispose previous -delay 1x30 -verbose *.png animation.gif
+convert -dispose previous -delay 1x30 -verbose -dither FloydSteinberg -colors 256 *.png animation.gif
+
 
 
 
