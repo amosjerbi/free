@@ -86,6 +86,9 @@ Adb pull storage/emulated/0/DCIM/ ~/Desktop
 
 8. Compress PDFs with ImageMagick
 
+Homebrew Install:
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
 Step 1:
 brew install imagemagick
 
@@ -105,7 +108,16 @@ Cd to folder
 convert -dispose previous -delay 1x30 -verbose *.png animation.gif
 convert -dispose previous -delay 1x30 -verbose -dither FloydSteinberg -colors 256 *.png animation.gif
 
+=======
+Lower Quality & convert all images to PDF using imagemagick
+=======
+Cd drag folder to Terminal
 
+Resize & lower quality:
+magick mogrify -quality 50 -resize 60% *.jpeg 
+
+Turn all jpegs to pdf
+convert *.jpeg -auto-orient 0_sketchbook.pdf
 
 
 
