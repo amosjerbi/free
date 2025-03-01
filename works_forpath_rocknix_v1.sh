@@ -9,6 +9,8 @@ GENESIS_DIR="$ROMS_BASE_DIR/genesis"
 GB_DIR="$ROMS_BASE_DIR/gb"
 GBA_DIR="$ROMS_BASE_DIR/gba"
 GAMEGEAR_DIR="$ROMS_BASE_DIR/gamegear"
+NGP_DIR="$ROMS_BASE_DIR/ngp"
+SMS_DIR="$ROMS_BASE_DIR/mastersystem"
 TEMP_FILE="/tmp/rom_list.txt"
 
 # Define platforms with their archive URLs
@@ -19,6 +21,8 @@ declare -A ARCHIVE_URLS=(
     ["gb"]="https://archive.org/download/game-boy-collection"
     ["gba"]="https://archive.org/download/GameboyAdvanceRomCollectionByGhostware"
     ["gg"]="https://archive.org/download/sega-game-gear-romset-ultra-us"
+    ["ngp"]="https://archive.org/download/neogeopocketromcollectionmm1000"
+    ["sms"]="https://archive.org/download/sega-master-system-romset-ultra-us"
 )
 
 # Function to get platform directory
@@ -43,6 +47,12 @@ get_platform_dir() {
             ;;
         "gg")
             echo "$GAMEGEAR_DIR"
+            ;;
+        "ngp")
+            echo "$NGP_DIR"
+            ;;
+        "sms")
+            echo "$SMS_DIR"
             ;;
         *)
             echo "$ROMS_BASE_DIR/$platform"
@@ -106,6 +116,22 @@ if [ ! -d "$GAMEGEAR_DIR" ]; then
     fi
 fi
 
+# Create NGP directory if it doesn't exist
+if [ ! -d "$NGP_DIR" ]; then
+    if ! mkdir -p "$NGP_DIR"; then
+        echo "Cannot create NGP directory $NGP_DIR. Please check permissions."
+        exit 1
+    fi
+fi
+
+# Create SMS directory if it doesn't exist
+if [ ! -d "$SMS_DIR" ]; then
+    if ! mkdir -p "$SMS_DIR"; then
+        echo "Cannot create Master System directory $SMS_DIR. Please check permissions."
+        exit 1
+    fi
+fi
+
 # Check if directories are writable
 if [ ! -w "$ROMS_BASE_DIR" ]; then
     echo "$ROMS_BASE_DIR is not writable"
@@ -139,6 +165,16 @@ fi
 
 if [ ! -w "$GAMEGEAR_DIR" ]; then
     echo "$GAMEGEAR_DIR is not writable"
+    exit 1
+fi
+
+if [ ! -w "$NGP_DIR" ]; then
+    echo "$NGP_DIR is not writable"
+    exit 1
+fi
+
+if [ ! -w "$SMS_DIR" ]; then
+    echo "$SMS_DIR is not writable"
     exit 1
 fi
 
@@ -188,8 +224,10 @@ select_platform() {
     echo "4. GB (Game Boy)"
     echo "5. GBA (Game Boy Advance)"
     echo "6. GG (Game Gear)"
+    echo "7. NGP (NeoGeo Pocket)"
+    echo "8. SMS (Sega Master System)"
     
-    read -p "Enter your choice (1-6): " platform_choice
+    read -p "Enter your choice (1-8): " platform_choice
     
     case $platform_choice in
         1)
@@ -216,6 +254,14 @@ select_platform() {
             CURRENT_PLATFORM="gg"
             echo "Selected platform: Game Gear"
             ;;
+        7)
+            CURRENT_PLATFORM="ngp"
+            echo "Selected platform: NeoGeo Pocket"
+            ;;
+        8)
+            CURRENT_PLATFORM="sms"
+            echo "Selected platform: Sega Master System"
+            ;;
         *)
             echo "Invalid choice. Using default platform: Genesis"
             CURRENT_PLATFORM="genesis"
@@ -230,7 +276,7 @@ list_platforms() {
     
     # Explicitly list all platforms with their URLs
     local i=1
-    local platforms_array=("nes" "snes" "genesis" "gb" "gba" "gg")
+    local platforms_array=("nes" "snes" "genesis" "gb" "gba" "gg" "ngp" "sms")
     local descriptions=(
         "Nintendo Entertainment System"
         "Super Nintendo Entertainment System"
@@ -238,6 +284,8 @@ list_platforms() {
         "Game Boy"
         "Game Boy Advance"
         "Game Gear"
+        "NeoGeo Pocket"
+        "Sega Master System"
     )
     
     # Display platforms
@@ -305,6 +353,12 @@ search_roms() {
             ;;
         "gg")
             archive_url="https://archive.org/download/sega-game-gear-romset-ultra-us"
+            ;;
+        "ngp")
+            archive_url="https://archive.org/download/neogeopocketromcollectionmm1000"
+            ;;
+        "sms")
+            archive_url="https://archive.org/download/sega-master-system-romset-ultra-us"
             ;;
         *)
             echo "Error: Unknown platform: $platform"
@@ -466,6 +520,36 @@ search_roms() {
                     mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
                 fi
                 ;;
+            "ngp")
+                # Try to find NGP-specific ROMs
+                grep -i "neogeo\|ngp" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
+                
+                # If we found a good number of NGP ROMs, use those
+                local ngp_count=$(wc -l < "${TEMP_FILE}.filtered")
+                if [ "$ngp_count" -gt 50 ]; then
+                    mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
+                else
+                    # Otherwise, use all ROMs and just exclude obvious non-NGP ones
+                    mv "${TEMP_FILE}.all" "$TEMP_FILE"
+                    grep -v -i "genesis\|megadrive\|32x\|sega\|nes\|snes\|nintendo\|playstation\|ps1\|ps2\|xbox" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
+                    mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
+                fi
+                ;;
+            "sms")
+                # Try to find SMS-specific ROMs
+                grep -i "master system\|mastersystem\|sms" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
+                
+                # If we found a good number of SMS ROMs, use those
+                local sms_count=$(wc -l < "${TEMP_FILE}.filtered")
+                if [ "$sms_count" -gt 50 ]; then
+                    mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
+                else
+                    # Otherwise, use all ROMs and just exclude obvious non-SMS ones
+                    mv "${TEMP_FILE}.all" "$TEMP_FILE"
+                    grep -v -i "genesis\|megadrive\|32x\|nes\|snes\|nintendo\|playstation\|ps1\|ps2\|xbox\|gameboy\|gba\|advance" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
+                    mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
+                fi
+                ;;
         esac
     fi
     
@@ -609,6 +693,12 @@ download_rom() {
         "gg")
             archive_url="https://archive.org/download/sega-game-gear-romset-ultra-us"
             ;;
+        "ngp")
+            archive_url="https://archive.org/download/neogeopocketromcollectionmm1000"
+            ;;
+        "sms")
+            archive_url="https://archive.org/download/sega-master-system-romset-ultra-us"
+            ;;
         *)
             echo "Error: Unknown platform: $platform"
             return 1
@@ -620,7 +710,7 @@ download_rom() {
         return 1
     fi
     
-    # Extract just the filename for display
+    # Extract just the filename without extension for display
     local rom_name=$(basename "$rom_file")
     local decoded_rom_name=$(urldecode "$rom_name")
     
@@ -677,6 +767,12 @@ download_all_roms() {
             ;;
         "gg")
             archive_url="https://archive.org/download/sega-game-gear-romset-ultra-us"
+            ;;
+        "ngp")
+            archive_url="https://archive.org/download/neogeopocketromcollectionmm1000"
+            ;;
+        "sms")
+            archive_url="https://archive.org/download/sega-master-system-romset-ultra-us"
             ;;
         *)
             echo "Error: Unknown platform: $platform"
@@ -802,6 +898,36 @@ download_all_roms() {
                 # Otherwise, use all ROMs and just exclude obvious non-GG ones
                 mv "${TEMP_FILE}.all" "$TEMP_FILE"
                 grep -v -i "genesis\|megadrive\|32x\|sega\|nes\|snes\|nintendo\|playstation\|ps1\|ps2\|xbox" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
+                mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
+            fi
+            ;;
+        "ngp")
+            # Try to find NGP-specific ROMs
+            grep -i "neogeo\|ngp" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
+            
+            # If we found a good number of NGP ROMs, use those
+            local ngp_count=$(wc -l < "${TEMP_FILE}.filtered")
+            if [ "$ngp_count" -gt 50 ]; then
+                mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
+            else
+                # Otherwise, use all ROMs and just exclude obvious non-NGP ones
+                mv "${TEMP_FILE}.all" "$TEMP_FILE"
+                grep -v -i "genesis\|megadrive\|32x\|sega\|nes\|snes\|nintendo\|playstation\|ps1\|ps2\|xbox" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
+                mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
+            fi
+            ;;
+        "sms")
+            # Try to find SMS-specific ROMs
+            grep -i "master system\|mastersystem\|sms" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
+            
+            # If we found a good number of SMS ROMs, use those
+            local sms_count=$(wc -l < "${TEMP_FILE}.filtered")
+            if [ "$sms_count" -gt 50 ]; then
+                mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
+            else
+                # Otherwise, use all ROMs and just exclude obvious non-SMS ones
+                mv "${TEMP_FILE}.all" "$TEMP_FILE"
+                grep -v -i "genesis\|megadrive\|32x\|nes\|snes\|nintendo\|playstation\|ps1\|ps2\|xbox\|gameboy\|gba\|advance" "$TEMP_FILE" > "${TEMP_FILE}.filtered"
                 mv "${TEMP_FILE}.filtered" "$TEMP_FILE"
             fi
             ;;
@@ -972,6 +1098,30 @@ verify_rom_directories() {
         echo " Game Gear directory created: $gg_dir"
     fi
     
+    # Check NGP directory
+    local ngp_dir=$(get_platform_dir "ngp")
+    if [ -d "$ngp_dir" ]; then
+        local ngp_count=$(find "$ngp_dir" -type f | wc -l)
+        echo " NeoGeo Pocket directory exists: $ngp_dir (Contains $ngp_count files)"
+    else
+        echo " NeoGeo Pocket directory does not exist: $ngp_dir"
+        echo "Creating NeoGeo Pocket directory..."
+        mkdir -p "$ngp_dir"
+        echo " NeoGeo Pocket directory created: $ngp_dir"
+    fi
+    
+    # Check SMS directory
+    local sms_dir=$(get_platform_dir "sms")
+    if [ -d "$sms_dir" ]; then
+        local sms_count=$(find "$sms_dir" -type f | wc -l)
+        echo " Master System directory exists: $sms_dir (Contains $sms_count files)"
+    else
+        echo " Master System directory does not exist: $sms_dir"
+        echo "Creating Master System directory..."
+        mkdir -p "$sms_dir"
+        echo " Master System directory created: $sms_dir"
+    fi
+    
     echo "ROM directory verification complete."
     read -p "Press Enter to continue..."
 }
@@ -1001,6 +1151,12 @@ test_archive_urls() {
                 ;;
             "gg")
                 archive_url="https://archive.org/download/sega-game-gear-romset-ultra-us"
+                ;;
+            "ngp")
+                archive_url="https://archive.org/download/neogeopocketromcollectionmm1000"
+                ;;
+            "sms")
+                archive_url="https://archive.org/download/sega-master-system-romset-ultra-us"
                 ;;
         esac
         
@@ -1058,7 +1214,7 @@ copy_roms_to_external() {
     fi
     
     # Copy each platform's ROMs
-    for platform in "nes" "snes" "genesis" "gb" "gba" "gg"; do
+    for platform in "nes" "snes" "genesis" "gb" "gba" "gg" "ngp" "sms"; do
         local src_dir="$old_base_dir/$platform"
         local dst_dir="$new_base_dir/$platform"
         
@@ -1104,6 +1260,7 @@ main_menu() {
             1)
                 clear
                 echo "===== Search ROMs ====="
+                echo "Available platforms: NES, SNES, Genesis, GB, GBA, GG, NeoGeo Pocket, Master System"
                 select_platform
                 read -p "Enter search term: " search_term
                 if [ -n "$search_term" ]; then
@@ -1114,12 +1271,14 @@ main_menu() {
             2)
                 clear
                 echo "===== List All ROMs ====="
+                echo "Available platforms: NES, SNES, Genesis, GB, GBA, GG, NeoGeo Pocket, Master System"
                 select_platform
                 search_roms "" "$CURRENT_PLATFORM"
                 ;;
             3)
                 clear
                 echo "===== Download All ROMs ====="
+                echo "Available platforms: NES, SNES, Genesis, GB, GBA, GG, NeoGeo Pocket, Master System"
                 echo "This will download all ROMs from the archive."
                 select_platform
                 read -p "Continue? (y/n): " confirm
