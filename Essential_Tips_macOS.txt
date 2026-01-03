@@ -117,8 +117,8 @@ Resize & lower quality:
 magick mogrify -quality 50 -resize 60% *.jpeg 
 
 Turn all jpegs to pdf
+magick *.jpeg -auto-orient 0_sketchbook.pdf
+
 convert *.jpeg -auto-orient 0_sketchbook.pdf
-
-
 
 
