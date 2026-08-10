@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Storage Analyzer</title>
+<style>
+  :root{
+    --bg:#F4F1EA;
+    --ink:#211F1B;
+    --sub:#8A857A;
+    --track:#DCE6F7;
+    --bar:#3B7DE8;
+    --card:#2B2925;
+    --danger:#D9534F;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .topbar{display:flex;align-items:center;gap:14px;padding:18px 16px 6px;}
+  .back{
+    width:34px;height:34px;flex:0 0 auto;border:none;background:none;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .back svg{width:22px;height:22px;stroke:var(--ink);}
+  .path{
+    font-size:22px;font-weight:800;letter-spacing:-0.02em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .summary{
+    padding:6px 16px 14px;font-size:15px;font-weight:700;color:var(--ink);
+  }
+  .summary .muted{color:var(--sub);font-weight:600;}
+  .picker-wrap{padding:0 16px 20px;}
+  .pick-btn{
+    width:100%;padding:16px;border:none;border-radius:14px;
+    background:var(--bar);color:#fff;font-size:16px;font-weight:700;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .pick-btn:active{opacity:.85;}
+  .hint{font-size:13px;color:var(--sub);margin-top:10px;line-height:1.5;}
+  #dirInput{display:none;}
+  .list{padding:4px 12px 40px;}
+  .row{
+    display:flex;align-items:center;gap:14px;padding:14px 4px;
+    border-bottom:1px solid rgba(0,0,0,0.06);
+  }
+  .icon{
+    width:48px;height:48px;flex:0 0 auto;border-radius:14px;background:var(--card);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .icon svg{width:22px;height:22px;stroke:#fff;fill:none;}
+  .row-body{flex:1;min-width:0;}
+  .row-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+  .name{
+    font-size:16px;font-weight:700;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .stats{font-size:14px;font-weight:700;color:var(--sub);white-space:nowrap;flex:0 0 auto;}
+  .track{
+    margin-top:8px;height:6px;border-radius:4px;background:var(--track);
+    position:relative;overflow:hidden;
+  }
+  .fill{
+    height:100%;border-radius:4px;background:var(--bar);
+  }
+  .empty{
+    padding:60px 24px;text-align:center;color:var(--sub);font-size:15px;line-height:1.6;
+  }
+  .status{padding:0 16px 10px;font-size:13px;color:var(--sub);}
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <button class="back" id="backBtn" aria-label="Back">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="path" id="pathLabel">Select a folder</div>
+  </div>
+
+  <div class="summary" id="summary"></div>
+  <div class="status" id="status"></div>
+
+  <div class="picker-wrap" id="pickerWrap">
+    <button class="pick-btn" id="pickBtn">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/></svg>
+      Choose Folder
+    </button>
+    <div class="hint">Pick a folder to scan. Files are ranked biggest to smallest, entirely on this device — nothing is uploaded anywhere.</div>
+  </div>
+
+  <input type="file" id="dirInput" webkitdirectory directory multiple>
+
+  <div class="list" id="list"></div>
+
+  <script>
+    const dirInput   = document.getElementById('dirInput');
+    const pickBtn    = document.getElementById('pickBtn');
+    const backBtn    = document.getElementById('backBtn');
+    const pathLabel  = document.getElementById('pathLabel');
+    const summaryEl  = document.getElementById('summary');
+    const statusEl   = document.getElementById('status');
+    const listEl     = document.getElementById('list');
+    const pickerWrap = document.getElementById('pickerWrap');
+
+    pickBtn.addEventListener('click', () => dirInput.click());
+    backBtn.addEventListener('click', () => location.reload());
+
+    function formatSize(bytes){
+      if (bytes >= 1073741824) return (bytes/1073741824).toFixed(1) + 'G';
+      if (bytes >= 1048576)    return (bytes/1048576).toFixed(1) + 'M';
+      if (bytes >= 1024)       return (bytes/1024).toFixed(1) + 'K';
+      return bytes + 'B';
+    }
+
+    function fileIcon(){
+      return `<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>`;
+    }
+
+    dirInput.addEventListener('change', () => {
+      const files = Array.from(dirInput.files || []);
+      if (!files.length){
+        statusEl.textContent = 'No files found in that folder.';
+        return;
+      }
+
+      // Root folder name, taken from the first file's relative path
+      const firstPath = files[0].webkitRelativePath || files[0].name;
+      const rootName = firstPath.split('/')[0];
+      pathLabel.textContent = '/' + rootName;
+      pickerWrap.style.display = 'none';
+      statusEl.textContent = '';
+
+      const sorted = files.slice().sort((a, b) => b.size - a.size);
+      const totalBytes = sorted.reduce((sum, f) => sum + f.size, 0);
+
+      summaryEl.innerHTML =
+        `Total: <span class="muted">${formatSize(totalBytes)}</span> &nbsp; (${sorted.length} items)`;
+
+      const maxSize = sorted[0].size || 1;
+      let html = '';
+
+      sorted.forEach(f => {
+        const rel = f.webkitRelativePath || f.name;
+        // strip the root folder prefix so names read cleanly
+        const displayName = rel.includes('/') ? rel.substring(rel.indexOf('/') + 1) : rel;
+        const pct = totalBytes ? Math.round((f.size / totalBytes) * 100) : 0;
+        const barPct = Math.max(2, Math.round((f.size / maxSize) * 100));
+
+        html += `
+          <div class="row">
+            <div class="icon">${fileIcon()}</div>
+            <div class="row-body">
+              <div class="row-top">
+                <div class="name" title="${displayName}">${displayName}</div>
+                <div class="stats">${formatSize(f.size)} &nbsp;${pct}%</div>
+              </div>
+              <div class="track"><div class="fill" style="width:${barPct}%"></div></div>
+            </div>
+          </div>`;
+      });
+
+      listEl.innerHTML = html;
+    });
+  </script>
+
+</body>
+</html>
